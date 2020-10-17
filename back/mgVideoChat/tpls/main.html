@@ -1,0 +1,274 @@
+
+<div class="sidebar" id="sidepanelnew" style="width:20%;">
+			<div class="user-info">
+				<div class="profile-img-wrapper">
+                <img src="https://tushubjj.com/public-group/img/phiz-icon.png" >
+				</div>
+				<h4 class="gold-text"><div id="youInfoPanel" class="panel panel-default" style="display: none">
+                <!-- YOU INFO -->
+                
+                <div class="panel-body" id="youInfo">
+                </div>
+            </div></h4>
+				
+			</div>
+			<hr>
+			<div class="contacts-wrapper">
+				<input type="text" id="search-contact" class="form-control search-contact" placeholder="Search">
+				<ul class="contact-list" id="contacts">
+               
+					
+					
+					
+					
+				</ul>
+			</div>
+    </div>
+   
+        <div class="main-content1" id="newpanel" style="width:80%;">
+        <nav class="navbar navbar-expand-md navbar-dark">
+				<div class="container1">
+					<a class="navbar-brand" href="#" ><span id="copyroom1"></span> Live Broadcast</a>
+						<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+					<div class="collapse navbar-collapse" id="collapsibleNavbar">
+						<ul class="navbar-nav nav-right">
+							<li class="nav-item">
+								<span id="link-holder" ></span>
+								<button class="btn btn-copy" name="link-holder" onclick="copyToClipboard(this.name)"  id="copy-btn">Copy</button>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+			<div class="main-view">
+				<div class="container">
+					<!--<div class="ctrls-wrapper">
+						<span class="ctrls"><i class="fa fa-volume-up"></i></span>
+						<span class="ctrls"><i class="fa fa-microphone"></i></span>
+						<span class="ctrls"><i class="fa fa-expand"></i></span>
+						<span   class="ctrls"><i class="fa fa-ellipsis-v"></i></span>
+					</div>-->
+				</div>
+				<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
+			    <div class="carousel-inner" role="listbox">
+			      <div class="carousel-item active">
+								<div class="user-vid-holder"  id="connectionsPanel">
+
+									
+								 
+								</div>
+
+
+			      </div>
+			      <div class="carousel-item">
+							<h3>Panel 2</h3>
+			      </div>
+			      <div class="carousel-item">
+							<h3>Panel 3</h3>
+			      </div>
+			    </div>
+			    <a class="carousel-control-prev"  role="button" data-slide="prev">
+			          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+			          <span class="sr-only">Previous</span>
+			        </a>
+			    <a class="carousel-control-next" role="button" data-slide="next">
+			          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+			          <span class="sr-only">Next</span>
+			        </a>
+			  </div>
+              
+              <div class="flex-holder">
+<div id="chatbox">
+						
+<div id="chatPanel" class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><% print($.fn.mgVideoChat._('Chat')); %></h3>
+                </div>
+                <div class="panel-body">
+                    <div id="chats"></div>                    
+                </div>
+            </div>               
+							<!--<div class="chat-content">
+								<div class="media-body-gray">
+									<img class="profile-pic-chat" src="img/default-profile.jpg">
+									<span>John Doe</span>
+										<p>Hello</p>
+										<p>how are you buddy?</p>
+										<span class="meta">
+											<time datetime="2018">00:10</time>
+										</span>
+								</div>
+							</div>
+							<div class="chat-content">
+									<div class="media-body-orange">
+											<p>Hello, I'm good, how bout you?</p>
+											<span class="meta">
+												<i class="fa fa-check"></i><i class="fa fa-check"></i>
+												<time datetime="2018">00:06</time>
+											</span>
+									</div>
+							</div>
+							-->
+												
+					</div>
+                    <div id="vid-large-holder">
+						<div id="callPanel" class="panel panel-default">
+               <!-- <div class="panel-heading">
+                    <h3 class="panel-title"><% print($.fn.mgVideoChat._('Call')); %></h3>
+                </div>-->
+                <div class="panel-body">
+                    <div id="videoPanel">
+                        <div id="videoToolbar" class="btn-group" role="toolbar">                                                       
+                            <button type="button" id="videoFullScreen" class="btn btn-default btn-lg" title="<% print($.fn.mgVideoChat._('Full Screen')); %>">
+                                <span class="glyphicon glyphicon-fullscreen"></span>
+                            </button>
+                            <button type="button" id="videoExitFullScreen" class="btn btn-default btn-lg" title="<% print($.fn.mgVideoChat._('Exit Full Screen')); %>">
+                                <span class="glyphicon glyphicon-resize-small"></span>
+                            </button>
+                            <button type="button" id="callHangup" class="btn btn-danger btn-lg" title="<% print($.fn.mgVideoChat._('Hang up')); %>">
+                                <span class="glyphicon glyphicon-phone-alt"></span>
+                            </button>
+                            <button type="button" id="videoMute" class="btn btn-default btn-lg" title="<% print($.fn.mgVideoChat._('Video Mute')); %>" data-title-on="<% print($.fn.mgVideoChat._('Video Mute')); %>" data-title-off="<% print($.fn.mgVideoChat._('Video Un-Mute')); %>" data-icon-on="glyphicon-eye-open" data-icon-off="glyphicon-eye-close">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                            </button>
+                            <button type="button" id="audioMute" class="btn btn-default btn-lg" title="<% print($.fn.mgVideoChat._('Audio Mute')); %>" data-title-on="<% print($.fn.mgVideoChat._('Audio Mute')); %>" data-title-off="<% print($.fn.mgVideoChat._('Audio Un-Mute')); %>" data-icon-on="glyphicon-volume-up" data-icon-off="glyphicon-volume-off">
+                                <span class="glyphicon glyphicon-volume-up"></span>
+                            </button>                            
+                        </div>
+  <video id="remoteVideo" autoplay="autoplay" playsinline height="20px;"></video>
+                     <video id="localVideo" autoplay="autoplay" playsinline  style="display: none; height:200px; width:100%;" muted="true"></video>
+
+                        <div id="remoteVideoBg" style="display: none"></div>
+                        <div id="localVideoBg" style="display: none"></div>                        
+                    </div>
+                </div>
+            </div>
+					</div>
+                    
+</div>
+				
+				
+			</div>
+            </div>
+  <!--<div id="loginPanel">
+        <button id="loginButton" class="btn btn-primary btn-lg"><% print($.fn.mgVideoChat._('Login')); %></button>
+    </div>    
+-->
+
+<div id="loginDialog" class="modal fade" data-focus-on="input:first" style="display: none">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><% print($.fn.mgVideoChat._('Login')); %></h4>
+            </div>
+            <div class="modal-body">
+                <label class="sr-only" for="userName"><% print($.fn.mgVideoChat._('Username')); %></label>
+                <input id="userName" class="form-control" type="text" data-tabindex="1" placeholder="Username">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary login"><% print($.fn.mgVideoChat._('Login')); %></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="answerDialog" class="modal fade" style="display: none" data-caller_id="">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Ringing</h4>
+            </div>
+            <div class="modal-body">
+                <h3 class="username"></h3>
+                <div class="desc"></div>
+            </div>
+            <div class="modal-footer">
+                <button id="answer" class="btn btn-success btn-lg" title="<% print($.fn.mgVideoChat._('Answer with Video')); %>">
+                    <span class="glyphicon glyphicon-facetime-video"></span>
+                </button>
+                <button id="answerAudio" class="btn btn-success btn-lg" title="<% print($.fn.mgVideoChat._('Answer Audio')); %>">
+                    <span class="glyphicon glyphicon-earphone"></span>
+                </button>              
+                <button id="cancelCall" class="btn btn-danger btn-lg" title="<% print($.fn.mgVideoChat._('Cancel')); %>">
+                    <span class="glyphicon glyphicon-phone-alt"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="shareDialog" class="modal fade" style="display: none" data-caller_id="">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><% print($.fn.mgVideoChat._('Share Video')); %></h4>
+            </div>
+            <div class="modal-body">
+                <h3><% print($.fn.mgVideoChat._('Please choose video source.')); %></h3>
+            </div>
+            <div class="modal-footer">
+                <button id="shareCam" class="btn btn-success btn-lg" title="<% print($.fn.mgVideoChat._('Share Webcam')); %>">
+                    <span class="glyphicon glyphicon-facetime-video"></span>
+                </button>
+                <button id="shareDesktop" class="btn btn-success btn-lg" title="<% print($.fn.mgVideoChat._('Share Desktop')); %>">
+                    <span class="glyphicon glyphicon-sound-stereo"></span>
+                </button>                
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="requestDialog" class="modal fade" style="display: none">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><% print($.fn.mgVideoChat._('Access confirmation')); %></h4>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-info">
+                    <% print($.fn.mgVideoChat._('<strong>Heads up!</strong> Please note browser confirmation dialog on top of your window.')); %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="fileAcceptDialog" class="modal fade" style="display: none">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title"><% print($.fn.mgVideoChat._('File Offer')); %></h4>
+            </div>
+            <div class="modal-body">
+                <h3 class="username"></h3>
+                <div class="desc"></div>
+                <p><% print($.fn.mgVideoChat._('is offering a file <strong class="fileName"></strong> of <em class="fileSize"></em>')); %></p>
+            </div>
+            <div class="modal-footer">
+                <button id="fileAccept" class="btn btn-success btn-lg" title="<% print($.fn.mgVideoChat._('Accept file')); %>">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </button>
+                <button id="fileCancel" class="btn btn-danger btn-lg" title="<% print($.fn.mgVideoChat._('Reject')); %>">
+                    <span class="glyphicon glyphicon-ban-circle"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<audio id="ringSound" preload="auto" loop="loop" style="display: none">
+    <source src="<%=config.dir + config.sound.ogg%>" type="audio/ogg">
+    <source src="<%=config.dir + config.sound.mp3%>" type="audio/mpeg">
+</audio>
+<audio id="notifySound" preload="auto" style="display: none">
+    <source src="<%=config.dir + config.notifySound.ogg%>" type="audio/ogg">
+    <source src="<%=config.dir + config.notifySound.mp3%>" type="audio/mpeg">
+</audio>
+<input style="display:none;" id="fileDialog" type="file" />

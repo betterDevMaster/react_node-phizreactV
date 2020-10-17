@@ -1,83 +1,167 @@
-<html> 
- 
-   <head> 
-      <title>WebRTC Video Demo</title>
-      <link rel = "stylesheet" href = "node_modules/bootstrap/dist/css/bootstrap.min.css"/>
-   </head>
-	
-   <style>
-	
-      body { 
-         background: #eee; 
-         padding: 5% 0; 
-      } 
-		
-      video { 
-         background: black; 
-         border: 1px solid gray; 
-      }
-		
-      .call-page { 
-         position: relative; 
-         display: block; 
-         margin: 0 auto; 
-         width: 500px; 
-         height: 500px; 
-      } 
-		
-      #localVideo { 
-         width: 150px; 
-         height: 150px; 
-         position: absolute; 
-         top: 15px; 
-         right: 15px; 
-      }
-		
-      #remoteVideo { 
-         width: 500px; 
-         height: 500px; 
-      }
-		
-   </style>
-	
-   <body>
-	
-   <div id = "loginPage" class = "container text-center"> 
-	
-      <div class = "row"> 
-         <div class = "col-md-4 col-md-offset-4">
-			
-            <h2>WebRTC Video Demo. Please sign in</h2> 
-            <label for = "usernameInput" class = "sr-only">Login</label> 
-            <input type = "email" id = "usernameInput" c
-               lass = "form-control formgroup" placeholder = "Login" 
-               required = "" autofocus = ""> 
-            <button id = "loginBtn" class = "btn btn-lg btn-primary btnblock">
-               Sign in</button>
-				
-         </div> 
-      </div> 
-		
-   </div>
-	
-   <div id = "callPage" class = "call-page"> 
-      <video id = "localVideo" autoplay></video> 
-      <video id = "remoteVideo" autoplay></video>
-		
-      <div class = "row text-center"> 
-         <div class = "col-md-12"> 
-            <input id = "callToUsernameInput" type = "text"
-               placeholder = "username to call" /> 
-            <button id = "callBtn" class = "btn-success btn">Call</button> 
-            <button id = "hangUpBtn" class = "btn-danger btn">Hang Up</button> 
-         </div>	
-      </div> 
-		
-   </div>
-	
-   <script src = "client.js"></script> 
-	
-   </body>
-	
-</html>		  
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PHIZ CHATROOM - Upgrade Account</title>
 
+		<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css"/>
+		<link rel="stylesheet" href="css/live-style.css">
+<link rel="stylesheet" href="mgVideoChat/videochat.css">
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+    <style>
+	.list-group-item{
+    display:inline-block;
+}
+	</style>
+</head>
+<body>
+<div id="mgVideoChat" class="whole-wrapper" style="height:700px; overflow-y:scroll;"></div>
+
+
+         
+  <div id="videoElement">
+
+  </div>
+	
+		<!--- sidebar section --->
+
+	
+
+		<script src="jquery.min.js"></script>
+        <script src="mgVideoChat/videochat.js"></script>
+<script src="menu.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+		
+       <script>
+	   function getvalues(){
+var inps = document.getElementsByName('chatname[]');
+for (var i = 0; i <inps.length; i++) {
+var inp=inps[i];
+//alert(inp.value);
+        $('#contacts').append('<li class="contact-item"><div class="profile-holder"><img src="img/default-profile.jpg"></div><div class="contact-name"><p class="gold-text"><i class="fa fa-bullhorn"></i>'+inp.value+'<a href="#"class="gift"><i class="fa fa-gift"></i></a></p></div></li>');
+
+    //alert("chatname["+i+"].value="+inp.value);
+}
+}
+
+            //get query string param
+            function getParameterByName(name) {
+                name = name.replace(/[\[]/, "\\\[").replace(/[\]]/, "\\\]");
+                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+                return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+            //update query strung parameter
+            function updateQueryStringParameter(uri, key, value) {
+                var re = new RegExp("([?|&])" + key + "=.*?(&|$)", "i");
+                var separator = uri.indexOf('?') !== -1 ? "&" : "?";
+                if (uri.match(re)) {
+                    return uri.replace(re, '$1' + key + "=" + value + '$2');
+                }
+                else {
+                    return uri + separator + key + "=" + value;
+                }
+            }
+            //get random number
+            function getRandomInt (min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+            
+            $(document).ready(function(){
+                //read chat room
+                var room = getParameterByName('room');
+                //no private chat room?
+                if(!room){
+                    //get one
+                    room = 'group_' + getRandomInt(1000, 100000);
+                    //redirect to chat room url
+                    window.location.href = updateQueryStringParameter(window.location.href,'room',room);
+                }
+				
+                
+                //init video chat
+                $('#mgVideoChat').mgVideoChat({
+                    wsURL: wsUrlDefault + '?room=' + room
+                });
+            });
+        </script>
+        
+		<script type="text/javascript">
+         setInterval(function(){ 
+		 $('#contacts').html('');
+		 $('#link-holder').text(window.location.href);
+		 var roomname1=document.getElementById("roomname").innerHTML;
+		 $('#copyroom1').text(roomname1);getvalues();}, 5000);
+		// copy to clipboard the link
+		function copyToClipboard(element) {
+            // alert(element);
+			var $temp = $("<input>");
+			$("body").append($temp);
+			$temp.val($(element).text()).select();
+			document.execCommand("copy");
+			//$temp.remove();
+
+			//change copy button to COPIED text
+			document.getElementById('copy-btn').innerText = 'COPIED!';
+             // alert(element);
+				//delay one second ahd reset copy button back to its COPY text
+				setTimeout(function(){
+					document.getElementById('copy-btn').innerText = 'Copy';
+				}, 1000);
+
+			}
+
+			var video = document.querySelector("#videoElement");
+			//access webcam script
+			if (navigator.mediaDevices.getUserMedia) {
+			  navigator.mediaDevices.getUserMedia({ video: true })
+			    .then(function (stream) {
+			      video.srcObject = stream;
+			    })
+			    .catch(function (err0r) {
+			      console.log("Something went wrong!");
+			    });
+			}
+
+
+		</script>
+        <script>
+		$(document).ready(function() {
+
+			//this script count how many video element and change the width and height
+			//maximum of 40 users on this if statement
+			videoCount = $(".user-vid-holder > .vid-feed").length;
+			if(videoCount >= 1 && videoCount <= 3){
+				$(".user-vid-holder > .vid-feed").css('width','310px');
+				$(".user-vid-holder > .vid-feed").css('height','255px');
+			}else if(videoCount >= 4 && videoCount <= 10){
+				$(".user-vid-holder > .vid-feed").css('width','200px');
+				$(".user-vid-holder > .vid-feed").css('height','145px');
+			}else if(videoCount >= 11 && videoCount <= 18){
+				$(".user-vid-holder > .vid-feed").css('width','150px');
+				$(".user-vid-holder > .vid-feed").css('height','109px');
+			}else if(videoCount >= 19 && videoCount <= 21){
+				$(".user-vid-holder > .vid-feed").css('width','140px');
+				$(".user-vid-holder > .vid-feed").css('height','102px');
+			}else if(videoCount >= 22 && videoCount <= 24){
+				$(".user-vid-holder > .vid-feed").css('width','130px');
+				$(".user-vid-holder > .vid-feed").css('height','94px');
+			}else {
+				$(".user-vid-holder > .vid-feed").css('width','100px');
+				$(".user-vid-holder > .vid-feed").css('height','73px');
+			}
+
+		});
+		
+				</script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+Progarme artchitecture
+
+Web videochat server ====> pulling data via link{var wsDomain = 'phizlive.io';
+var _socket = new WebSocket("ws://127.0.0.1:8080");} ======>client app taken data via link ===    making web socket  connection===> calling them data  websocket intialie as function or your scope
+
+example apps howing ho to calling them  

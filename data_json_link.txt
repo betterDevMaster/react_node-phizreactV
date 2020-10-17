@@ -1,0 +1,8 @@
+ https://www.phizlive.io/phzlive-data/youtube_jsondata ===> Youyube jon 
+ https://www.phizlive.io/phzlive-data/topApps_jsondata
+===> top apps data 
+ https://www.phizlive.io/phzlive-data/promoteroom_jsondata===> proote room data 
+ https://www.phizlive.io/phzlive-data/randomusers_jsondata
+===> random uer data 
+https://www.phizlive.io/phzlive-data/game_jsondata===>game json data
+
