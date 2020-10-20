@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import friendData from '../../../data/friendData.json'
-
 import $ from "jquery"
+import WebRTC from '../../../webrtc'
 
 export class videoCall extends Component {
 
@@ -17,9 +17,19 @@ export class videoCall extends Component {
             mSt:'../../assets/icons/mute.png',
         };
 
+        const roomName = window.localStorage.getItem("roomName")
+        WebRTC.getInstance().startRoom(roomName, 'test', 'Ultra-HD')
+        WebRTC.getInstance().connection.openOrJoin(roomName, function(isRoomExist, roomid, error) {
+            WebRTC.getInstance().connection.maxParticipantsAllowed = 1;
+            if(error) {
+                alert(error);
+            }
+            else if (WebRTC.getInstance().connection.isInitiator === true) {
+            }
+        });
+        
         this.friendCameraControl=this.friendCameraControl.bind(this);
         this.swithControl=this.swithControl.bind(this);
-        
     } 
 
     componentDidMount(){
@@ -38,6 +48,7 @@ export class videoCall extends Component {
             }else{
                 this.setState({fr_v_call:true});
             }
+            WebRTC.getInstance().toogleMute(this.state.fr_v_call, 1);
         }else if(name==="fr_volume"){
             if(this.state.fr_v_cont){
                 $('.fr-volum').css('display','block');
@@ -46,35 +57,39 @@ export class videoCall extends Component {
                 $('.fr-volum').css('display','none');
                 this.setState({fr_v_cont:!this.state.fr_v_cont});
             }
-
-           
         }else{
             this.props.pCall(name);
+            WebRTC.getInstance().exitRoom()
         }
     }
-    
     swithControl(name){
         console.log(name);
+
         if(name==="volume"){
             var dis = (document.getElementsByClassName('randomUser-volum-warraper')[1].style.display === "block")?"none":"block";
-          document.getElementsByClassName('randomUser-volum-warraper')[1].style.display=dis;
+            document.getElementsByClassName('randomUser-volum-warraper')[1].style.display=dis;
         }else if(name==='mute'){
             var imgurl2 = (this.state.mSt === '../../assets/icons/mute.png')?'../../assets/icons/captuer-mute.png':'../../assets/icons/mute.png';
+            const status = this.state.mSt === '../../assets/icons/mute.png' ? false : true
             var m_show = (this.state.mSt === '../../assets/icons/mute.png')? 'block':'none';
             this.setState({mSt:imgurl2});
-            document.getElementsByClassName('users-mic-mute')[1].style.display=m_show;        
+            document.getElementsByClassName('users-mic-mute')[1].style.display=m_show;    
+            WebRTC.getInstance().toogleMute(status, 0);
         }else{
-            console.log('vidioStop');
             var imgurl1 = (this.state.vSt === '../../assets/icons/video.png')?'../../assets/icons/video-stopA.png':'../../assets/icons/video.png';
+            const status = this.state.vSt === '../../assets/icons/video.png' ? false : true
             this.setState({vSt:imgurl1});
             var v_show = (this.state.vSt === '../../assets/icons/video.png')? 'flex':'none';
             var v_h = (this.state.vSt === '../../assets/icons/video.png')? '22px':'15px';
             document.getElementsByClassName('user-camera')[0].style.display=v_show;
             document.getElementsByClassName('random-u-cp-stop')[0].style.height=v_h;
+
+            WebRTC.getInstance().toggleCamera(status);
         }
     }
-
-    
+    volumeControl(e, type) {
+        WebRTC.getInstance().toogleVolume(e.target.valueAsNumber, type);
+    }
 
     render() {
         return (
@@ -100,14 +115,16 @@ export class videoCall extends Component {
 {/* friend */}
                 <div className="fr-c-camerra">
                     <div className="camerra-wrraper f-c-w">
-                        <img className="f-c-video" src={this.state.fr_data[this.props.fr_videoCall]["face"]} alt=""></img>
+                        <video className='f-c-video' autoPlay playsInline loop muted></video>
+
+                        {/* <img className="f-c-video" src={this.state.fr_data[this.props.fr_videoCall]["face"]} alt=""></img> */}
                         <div className="users-mic-mute pos-ab fr-mute" style={{top:'25px', left:'15px', width:'90px', height:'100px', display:'none'}} >
                             <img src={'../../assets/icons/captuer-mute-shawdow.png'} alt="" style={{width:"100%", height:"100%"}}></img>
                         </div>
                         <div className="randomUser-volum-warraper pos-ab fr-volum" style={{display:'none'}}>
                             <div className="own-volum own-control">
                                 <div className="slidecontainer">
-                                    <input type="range" min="1" max="100" className="sliderA" id="myRange"/> 
+                                    <input type="range" min="1" max="100" className="sliderA" id="frRange" onChange={(e)=>this.volumeControl(e, 1)} /> 
                                     <img src={'../../assets/icons/range-back.png'} alt="" className="range-back" style={{height:"28px",top:"9px" }}></img>
                                 </div>
                             </div>
@@ -132,7 +149,8 @@ export class videoCall extends Component {
                 <div className="pos-ab" style={{bottom:"0",right:'40px', width:"fit-content"}}>
                     <div className="fr-c-own pos-re">
                         <div className="camerra-wrraper o-c-w">
-                            <img className="o-c-video" src={'../../assets/profile/img_avatar 1.png'} alt=""></img>
+                            {/* <img className="o-c-video" src={'../../assets/profile/img_avatar 1.png'} alt=""></img> */}
+                            <video className='o-c-video' autoPlay playsInline loop muted></video>
                             <div className="own-videoStop pos-ab user-camera" style={{top:'0',left:'0', borderRadius:"20px", zIndex:'3'}} onClick={()=>this.swithControl("own")}>
                                 <div className="own-videoStop-icon" style={{width:'120px'}}></div>
                             </div>
@@ -140,7 +158,7 @@ export class videoCall extends Component {
                         <div className="randomUser-volum-warraper pos-ab" style={{display:'none'}}>
                             <div className="own-volum own-control">
                                 <div className="slidecontainer">
-                                <input type="range" min="1" max="100" className="sliderA" id="myRange"/> 
+                                <input type="range" min="1" max="100" className="sliderA" id="myRange" onChange={(e)=>this.volumeControl(e, 0)} /> 
                                 <img src={'../../assets/icons/range-back.png'} alt="" className="range-back" style={{height:"20px",top:"28px" }}></img>
                                 </div>
                             </div>

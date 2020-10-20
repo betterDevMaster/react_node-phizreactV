@@ -6,6 +6,7 @@ import VideoChat from '../../components/build/video-call'
 import friendData from '../../data/friendData.json'
 import FriendsGame from '../../components/firendRoom/friendsGame'
 import $ from "jquery"
+import WebRTC from '../../webrtc'
 
 export class index extends Component {
     constructor(props){
@@ -23,18 +24,14 @@ export class index extends Component {
         this.cha= this.cha.bind(this);    
         this.parentCallback=this.parentCallback.bind(this);
     } 
-
     componentDidMount(){
         this.props.handleLinkActive('friendState');
-        console.log(this.props.location.state); 
         if(this.props.location.state){
             $('.size-reduce-btn').trigger('click'); 
             this.setState({precontentState:false})
             this.setState({friendsGameState:true})
         }
-
     }
-
     handleLinkActive(txt){        
         // console.log(txt);
         this.setState({
@@ -42,10 +39,10 @@ export class index extends Component {
         });
         this.setState({[txt]: true});
     }
-
     cha(comes_key){  
-        // console.log(comes_key);      
         if(comes_key >= 0){    
+            WebRTC.getInstance().createRoom('vc_' + comes_key)
+
             this.setState({precontentState:false});
             this.setState({messageState:true}, ()=> {
                 this.setState({f_name:this.state.fr_data[comes_key]["name"]}) 
@@ -53,16 +50,13 @@ export class index extends Component {
             });
             this.setState({videoCallState:false});
         }    
-                      
     }
-
     parentCallback = (come_txt) => {  
         if(come_txt === "vc"){
             this.setState({messageState:false});
             this.setState({videoCallState:true});
         }        
     }
-
     getEndState = (come_end) => {
         if(come_end !==""){
             this.setState({precontentState:false});
@@ -70,8 +64,6 @@ export class index extends Component {
             this.setState({videoCallState:false});
         }
     }
-
-    
     render() {
         const{
             precontentState,
@@ -105,7 +97,6 @@ export class index extends Component {
                         </div>
                     </div>
                 </div>
-                
             </div>            
         )
     }
